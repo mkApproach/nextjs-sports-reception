@@ -22,16 +22,6 @@ export const formatDateToLocal = (
 
   return `${year}年${month}月${date}日  (${week})`
 
-  /*
-  console.log(date)
-  const options: Intl.DateTimeFormatOptions = {
-   year: 'numeric',
-   month: 'numeric',
-   day: 'numeric',
- 
-  };
-  const formatter = new Intl.DateTimeFormat(locale, options);
-  return formatter.format(date);*/
 };
 
 
