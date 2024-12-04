@@ -1,7 +1,5 @@
-import { Revenue } from './definitions';
-
-export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString('en-US', {
+export const formatCurrency = (name: number) => {
+  return (name / 100).toLocaleString('en-JP', {
     style: 'currency',
     currency: 'USD',
   });
@@ -9,31 +7,33 @@ export const formatCurrency = (amount: number) => {
 
 export const formatDateToLocal = (
   dateStr: string,
-  locale: string = 'en-US',
+  locale: string = 'en-JP',
 ) => {
-  const date = new Date(dateStr);
+ 
+  const tergetdate = new Date(dateStr);
+
+  const year = tergetdate.getFullYear();
+  const month = tergetdate.getMonth() + 1;
+  const date = tergetdate.getDate();
+  const day = tergetdate.getDay();
+  const week = ["日", "月", "火", "水", "木", "金", "土"][day];
+
+  console.log(tergetdate)
+
+  return `${year}年${month}月${date}日  (${week})`
+
+  /*
+  console.log(date)
   const options: Intl.DateTimeFormatOptions = {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
+   year: 'numeric',
+   month: 'numeric',
+   day: 'numeric',
+ 
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
-  return formatter.format(date);
+  return formatter.format(date);*/
 };
 
-export const generateYAxis = (revenue: Revenue[]) => {
-  // Calculate what labels we need to display on the y-axis
-  // based on highest record and in 1000s
-  const yAxisLabels = [];
-  const highestRecord = Math.max(...revenue.map((month) => month.revenue));
-  const topLabel = Math.ceil(highestRecord / 1000) * 1000;
-
-  for (let i = topLabel; i >= 0; i -= 1000) {
-    yAxisLabels.push(`$${i / 1000}K`);
-  }
-
-  return { yAxisLabels, topLabel };
-};
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
