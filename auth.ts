@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { authConfig } from '@/auth.config';
+import { authConfig } from '@/app/api/auth/auth.config';
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
@@ -35,7 +35,7 @@ export const { auth, signIn, signOut } = NextAuth({
           console.log('userですよ', user)
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
-          const userone = { id: "1", name: user.name, email: user.email }
+          const userone = { id: "1", name: user.name, email: user.email, password: user.password }
           if (passwordsMatch) return userone;
         }
  
