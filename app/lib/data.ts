@@ -91,7 +91,7 @@ export async function fetchReceptionsPages(query: string) {
   }
 }
 
-export async function fetchReceptionById(id: string) {
+export async function fetchReceptionById(id: number) {
   try {
     const data = await sql<ReceptionForm>`
       SELECT
